@@ -32,7 +32,7 @@
 
 ## 📄 Documentation
 
-* [Software Requirements Specification (SRS)](docs/ExpressMe_SRS_v0_12.md): functional and non-functional requirements, architecture, and acceptance criteria.
+* [Software Requirements Specification (SRS)](docs/ExpressMe_SRS.md): functional and non-functional requirements, architecture, and acceptance criteria.
   
 ## 🚀 Getting Started
 
