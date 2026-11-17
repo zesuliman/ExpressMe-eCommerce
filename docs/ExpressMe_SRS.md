@@ -371,17 +371,3 @@ Each criterion lists the requirements it verifies.
 - Partial shipments, per-product tax rates, and carrier-calculated shipping rates.
 - Extracting selected modules into separate services or databases if scale, operational needs, or isolation requirements justify it.
 
-## 7. Confirmed Assumptions and Decisions
-
-The following assumptions and decisions were confirmed by the author.
-
-1. **COD charge:** The COD charge is a fee kept by ExpressMe, not taxed, and included in the remittance (see FR-037, FR-080).
-2. **Payment methods:** Each order uses one standard payment method (card, wallet, or COD), optionally combined with one gift card. The wallet is treated as a standard method and cannot be combined with card or COD (see FR-060 and FR-061).
-3. **Order creation:** An order with no prepaid component is created as `CONFIRMED` immediately (see FR-048).
-4. **COD failed delivery:** A shipped COD order that is refused or cannot be delivered is marked `DELIVERY_FAILED`, its items are restored to stock, and the Customer is notified. When the same Customer reaches 3 failed COD deliveries, the account is flagged and may be suspended by an Admin (see FR-054, FR-055, and FR-056).
-5. **Refund policy:** Refunds are initiated when a return is approved, and shipping and COD charges are not refunded (see FR-086).
-6. **Discount stacking:** A seasonal discount, one voucher, one gift card, and one standard payment method can be used together; at most one voucher and one gift card per order, and one product or category discount per line (the largest) (see FR-039).
-7. **Scale target:** 1,000,000 concurrent users is kept as the design target in NFR-001, but it cannot be demonstrated on a single-host Docker Compose setup. NFR-002 defines a target that can be measured on the reference environment.
-8. **Defaults:** Return window of 14 days, payment window of 30 minutes, 7-year record retention, 5 processing attempts, and the other default values in the requirements are accepted as initial settings.
-9. **Voucher treatment:** A voucher is a price discount applied before tax, not a payment method. Only the standard payment methods and gift cards are payment components (see FR-039 and FR-040).
-10. **Database schemas:** One PostgreSQL database with two schemas: `finance` for money data (wallet, ledger, payments, COD settlement) and `app` for all other data (see NFR-018).
